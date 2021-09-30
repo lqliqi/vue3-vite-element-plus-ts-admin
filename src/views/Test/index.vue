@@ -43,22 +43,16 @@ import { reactive, watch } from 'vue'
 import CommonSearchForm from '@/components/CommonSearchForm.vue'
 import CommonTable from '@/components/CommonTable.vue'
 
-// const queryObject = reactive({
-//   pageNumber: 1,
-//   pageSize: 10,
-//   professional: '',
-//   name: ''
-// })
-
-const getDefaultQueryObject = reactive({
-  data: {
+const getDefaultQueryObject = function () {
+  return {
     pageNumber: 1,
     pageSize: 10,
     professional: '',
     name: ''
-  }
-})
-const queryObject = getDefaultQueryObject.data
+  } as Record<string, any>
+}
+const queryObject = reactive(getDefaultQueryObject())
+console.log('queryObject ', queryObject)
 
 const totalItemCount = 6
 const tableData = reactive([
@@ -185,15 +179,9 @@ function onSearchButtonClicked() {
   update()
 }
 function onResetButtonClicked() {
-  console.log('onResetButtonClicked')
-  Object.keys(queryObject).forEach((key) => {
-    if (key === 'pageNumber') {
-      queryObject[key] = 1
-    } else if (key === 'pageSize') {
-      queryObject[key] = 10
-    } else {
-      ;(queryObject as any)[key] = ''
-    }
+  // 默认情况下修改对象, 界面不会自动更,如果想更新, 可以通过对象属性重新赋值的方式
+  Object.keys(getDefaultQueryObject()).forEach((key) => {
+    queryObject[key] = getDefaultQueryObject()[key]
   })
   update()
 }
