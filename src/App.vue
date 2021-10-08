@@ -6,17 +6,11 @@
 
 <style>
 body,
-html {
+html,
+#app {
   box-sizing: border-box;
+  height: 100%;
   margin: 0;
   padding: 0;
-}
-#app {
-  overflow: hidden;
-  color: #2c3e50;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  text-align: center;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 </style>

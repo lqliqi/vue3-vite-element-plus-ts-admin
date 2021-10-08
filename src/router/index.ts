@@ -20,6 +20,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/Test',
     name: 'Test',
     component: () => import('@/views/Test/index.vue') // 懒加载组件
+  },
+  {
+    path: '/Info',
+    name: 'Info',
+    component: () => import('@/views/Info/index.vue')
   }
 ]
 
