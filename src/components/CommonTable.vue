@@ -49,5 +49,9 @@ const handleCurrentChange = (val: any) => {
 <style lang="less" scoped>
 .CommonTable {
   display: block;
+  .demo-pagination-block {
+    margin-top: 20px;
+    text-align: right;
+  }
 }
 </style>
