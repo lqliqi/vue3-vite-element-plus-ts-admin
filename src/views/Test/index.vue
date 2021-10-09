@@ -1,6 +1,6 @@
 <template>
   <div class="Test">
-    <h1>用来展示一些组件的用法</h1>
+    <h1>组件使用</h1>
     <el-tabs v-model="activeTab">
       <el-tab-pane
         v-for="(item, index) in tabList"
@@ -46,13 +46,35 @@
         </el-table-column>
       </CommonTable>
     </div>
-    <div v-show="activeTab === '信息'"></div>
+    <div v-show="activeTab === '信息'">
+      <CommonCard>
+        <CommonTitle> 详情信息 </CommonTitle>
+        <CommonGrid>
+          <CommonGridOption label="姓名" :expand="false" :valueModified="true">
+            李菜菜</CommonGridOption
+          >
+          <CommonGridOption label="性别" :expand="false"> 男</CommonGridOption>
+          <CommonGridOption label="姓名" :expand="false"> 李菜菜</CommonGridOption>
+          <CommonGridOption label="性别" :expand="false"> 男</CommonGridOption>
+          <CommonGridOption label="姓名" :expand="false"> 李菜菜</CommonGridOption>
+          <CommonGridOption label="性别" :expand="false"> 男</CommonGridOption>
+        </CommonGrid>
+      </CommonCard>
+    </div>
+    <div v-show="activeTab === '创建'">
+      <CommonFileUploader></CommonFileUploader>
+    </div>
   </div>
 </template>
 <script lang="ts" setup>
 import { reactive, watch, ref } from 'vue'
+import CommonFileUploader from '@/components/CommonFileUploader.vue'
 import CommonSearchForm from '@/components/CommonSearchForm.vue'
 import CommonTable from '@/components/CommonTable.vue'
+import CommonGrid from '@/components/CommonGrid.vue'
+import CommonTitle from '@/components/CommonTitle.vue'
+import CommonCard from '@/components/CommonCard.vue'
+import CommonGridOption from '@/components/CommonGridOption.vue'
 
 const activeTab = ref('列表')
 const tabList = ['列表', '信息', '创建']
