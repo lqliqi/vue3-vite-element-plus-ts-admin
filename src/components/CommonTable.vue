@@ -9,7 +9,7 @@
         :page-sizes="[10, 20, 30, 40]"
         :page-size="queryObject?.pageSize"
         :current-page="queryObject?.pageNumber"
-        layout="sizes, prev, pager, next"
+        layout="total, sizes, prev, pager, next, jumper"
         :total="totalItemCount"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
@@ -34,6 +34,7 @@ watch(
   { immediate: true, deep: true }
 )
 const currentPage2 = ref(5)
+
 const emit = defineEmits(['update'])
 const handleSizeChange = (val: any) => {
   console.log(`每页数据${val}条`)
@@ -51,7 +52,7 @@ const handleCurrentChange = (val: any) => {
   display: block;
   .demo-pagination-block {
     margin-top: 20px;
-    text-align: right;
+    text-align: center;
   }
 }
 </style>
