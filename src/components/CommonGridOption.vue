@@ -22,9 +22,6 @@ const props = defineProps({
   valueModified: Boolean,
   expand: Boolean
 })
-console.log('props: ', props)
-console.log('props.expand: ', props.expand)
-
 const md = ref(12)
 const lg = ref(8)
 if (props.expand) {

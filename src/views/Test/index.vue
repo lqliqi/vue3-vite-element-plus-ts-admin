@@ -30,7 +30,9 @@
         :queryObject="queryObject"
         :totalItemCount="totalItemCount"
         :list="tableData"
+        :loading="tableLoading"
         @update="update"
+        @changeLoadingStatus="changeLoadingStatus"
       >
         <el-table-column prop="date" label="Date" width="200" />
         <el-table-column prop="name" label="Name" width="200" />
@@ -78,6 +80,7 @@ import CommonGridOption from '@/components/CommonGridOption.vue'
 
 const activeTab = ref('列表')
 const tabList = ['列表', '信息', '创建']
+const tableLoading = ref(true)
 const getDefaultQueryObject = function () {
   return {
     pageNumber: 1,
@@ -88,7 +91,8 @@ const getDefaultQueryObject = function () {
 }
 const queryObject = reactive(getDefaultQueryObject())
 console.log('queryObject ', queryObject)
-
+// 子组件ref
+const table = ref('table')
 const totalItemCount = 6
 const tableData = reactive([
   {
@@ -185,7 +189,11 @@ const tableData = reactive([
 function handleClick(control: string) {
   console.log('click: ', control)
 }
-function update() {
+// 修改loading 状态
+function changeLoadingStatus(value: boolean) {
+  tableLoading.value = value
+}
+async function update() {
   console.log('update')
   tableData.length = 0 // 清空原数组
   const newArr = []
@@ -201,7 +209,14 @@ function update() {
     })
   }
   tableData.push(...newArr) // 解构然后push进去
+  setTimeout(() => {
+    tableLoading.value = false
+  }, 3000)
+  console.log('tableLoading.value', tableLoading.value)
+  // eslint-disable-next-line no-return-await
 }
+console.log('update', update())
+
 watch(
   () => tableData,
   (count, prevCount) => {
@@ -210,15 +225,14 @@ watch(
   }
 )
 function onSearchButtonClicked() {
-  console.log('onSearchButtonClicked queryObject: ', queryObject)
-  update()
+  ;(table.value as any).searchForPageOne()
 }
 function onResetButtonClicked() {
   // 默认情况下修改对象, 界面不会自动更,如果想更新, 可以通过对象属性重新赋值的方式
   Object.keys(getDefaultQueryObject()).forEach((key) => {
     queryObject[key] = getDefaultQueryObject()[key]
   })
-  update()
+  ;(table.value as any).searchForPageOne()
 }
 function onExportButtonClicked() {
   console.log('onExportButtonClicked')
