@@ -14,14 +14,14 @@
   </div>
 </template>
 <script setup lang="ts">
-let dialogImageUrl = ''
-let dialogVisible = false
+let dialogImageUrl = '';
+let dialogVisible = false;
 function handleRemove(file: any, fileList: any) {
-  console.log(file, fileList)
+  console.log(file, fileList);
 }
 function handlePictureCardPreview(file: { url: string }) {
-  dialogImageUrl = file.url
-  dialogVisible = true
+  dialogImageUrl = file.url;
+  dialogVisible = true;
 }
 </script>
 <style lang="less" scoped>

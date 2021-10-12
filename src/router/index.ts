@@ -1,6 +1,6 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-import Home from '@/views/Home/index.vue'
-import Layout from '@/views/Layout/index.vue'
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
+import Home from '@/views/Home/index.vue';
+import Layout from '@/views/Layout/index.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -26,11 +26,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Info',
     component: () => import('@/views/Info/index.vue')
   }
-]
+];
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes
-})
+});
 
-export default router
+export default router;

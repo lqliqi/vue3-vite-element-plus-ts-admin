@@ -2,12 +2,7 @@
   <div class="Test">
     <h1>组件使用</h1>
     <el-tabs v-model="activeTab">
-      <el-tab-pane
-        v-for="(item, index) in tabList"
-        :label="item"
-        :key="index"
-        :name="item"
-      ></el-tab-pane>
+      <el-tab-pane v-for="(item, index) in tabList" :label="item" :key="index" :name="item"></el-tab-pane>
     </el-tabs>
     <div v-show="activeTab === '列表'">
       <CommonSearchForm
@@ -51,9 +46,7 @@
       <CommonCard>
         <CommonTitle> 详情信息 </CommonTitle>
         <CommonGrid>
-          <CommonGridOption label="姓名" :expand="false" :valueModified="true">
-            李菜菜</CommonGridOption
-          >
+          <CommonGridOption label="姓名" :expand="false" :valueModified="true"> 李菜菜</CommonGridOption>
           <CommonGridOption label="性别" :expand="false"> 男</CommonGridOption>
           <CommonGridOption label="姓名" :expand="false"> 李菜菜</CommonGridOption>
           <CommonGridOption label="性别" :expand="false"> 男</CommonGridOption>
@@ -68,30 +61,30 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { reactive, watch, ref, provide } from 'vue'
-import CommonFileUploader from '@/components/CommonFileUploader.vue'
-import CommonSearchForm from '@/components/CommonSearchForm.vue'
-import CommonTable from '@/components/CommonTable.vue'
-import CommonGrid from '@/components/CommonGrid.vue'
-import CommonTitle from '@/components/CommonTitle.vue'
-import CommonCard from '@/components/CommonCard.vue'
-import CommonGridOption from '@/components/CommonGridOption.vue'
+import { reactive, watch, ref, provide } from 'vue';
+import CommonFileUploader from '@/components/CommonFileUploader.vue';
+import CommonSearchForm from '@/components/CommonSearchForm.vue';
+import CommonTable from '@/components/CommonTable.vue';
+import CommonGrid from '@/components/CommonGrid.vue';
+import CommonTitle from '@/components/CommonTitle.vue';
+import CommonCard from '@/components/CommonCard.vue';
+import CommonGridOption from '@/components/CommonGridOption.vue';
 
-const activeTab = ref('列表')
-const tabList = ['列表', '信息', '创建']
-const tableLoading = ref(true)
+const activeTab = ref('列表');
+const tabList = ['列表', '信息', '创建'];
+const tableLoading = ref(true);
 const getDefaultQueryObject = function () {
   return {
     pageNumber: 1,
     pageSize: 10,
     professional: '',
     name: ''
-  } as Record<string, any>
-}
-const queryObject = reactive(getDefaultQueryObject())
+  } as Record<string, any>;
+};
+const queryObject = reactive(getDefaultQueryObject());
 // 子组件ref
-const table = ref('table')
-const totalItemCount = 6
+const table = ref('table');
+const totalItemCount = 6;
 const tableData = reactive([
   {
     date: '2016-05-03',
@@ -183,20 +176,20 @@ const tableData = reactive([
     zip: 'CA 90036',
     tag: 'Home'
   }
-])
+]);
 // 详情
 function DetailClicked() {
-  console.log('DetailClicked: ')
+  console.log('DetailClicked: ');
 }
 // 编辑
 function EditClicked() {
-  console.log('DetailClicked: ')
+  console.log('DetailClicked: ');
 }
 // 更新数据
 async function update() {
-  console.log('update')
-  tableData.length = 0 // 清空原数组
-  const newArr = []
+  console.log('update');
+  tableData.length = 0; // 清空原数组
+  const newArr = [];
   for (let i = 0; i < queryObject.pageSize; i += 1) {
     newArr.push({
       date: '2016-05-03',
@@ -206,34 +199,34 @@ async function update() {
       address: 'No. 189, Grove St, Los Angeles',
       zip: 'CA 90036',
       tag: 'Home'
-    })
+    });
   }
-  tableData.push(...newArr) // 解构然后push进去
+  tableData.push(...newArr); // 解构然后push进去
 }
 // 使用provide和 inject 实现 update 方法的监听
-provide('update', update)
+provide('update', update);
 // 监听表格数据变化
 watch(
   () => tableData,
   (count, prevCount) => {
-    console.log('tableData count ', count)
-    console.log('tableData prevCount ', prevCount)
+    console.log('tableData count ', count);
+    console.log('tableData prevCount ', prevCount);
   }
-)
+);
 // 搜索
 function onSearchButtonClicked() {
-  ;(table.value as any).searchForPageOne()
+  (table.value as any).searchForPageOne();
 }
 // 重置搜索项
 function onResetButtonClicked() {
   // 默认情况下修改对象, 界面不会自动更,如果想更新, 可以通过对象属性重新赋值的方式
   Object.keys(getDefaultQueryObject()).forEach((key) => {
-    queryObject[key] = getDefaultQueryObject()[key]
-  })
-  ;(table.value as any).searchForPageOne()
+    queryObject[key] = getDefaultQueryObject()[key];
+  });
+  (table.value as any).searchForPageOne();
 }
 // 导出
 function onExportButtonClicked() {
-  console.log('onExportButtonClicked')
+  console.log('onExportButtonClicked');
 }
 </script>

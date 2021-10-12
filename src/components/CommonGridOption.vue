@@ -15,18 +15,18 @@
   </el-col>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
 
 const props = defineProps({
   label: String,
   valueModified: Boolean,
   expand: Boolean
-})
-const md = ref(12)
-const lg = ref(8)
+});
+const md = ref(12);
+const lg = ref(8);
 if (props.expand) {
-  md.value = 24
-  lg.value = 24
+  md.value = 24;
+  lg.value = 24;
 }
 </script>
 <style lang="less" scoped>

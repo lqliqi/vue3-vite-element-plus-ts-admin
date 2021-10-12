@@ -5,21 +5,11 @@
         <slot></slot>
       </div>
       <el-form-item class="text-right">
-        <el-button
-          v-if="onSearchButtonClicked"
-          class="m-right10"
-          type="primary"
-          @click="onSearchButtonClicked"
+        <el-button v-if="onSearchButtonClicked" class="m-right10" type="primary" @click="onSearchButtonClicked"
           >查询</el-button
         >
-        <el-button v-if="onResetButtonClicked" class="m-right10" @click="onResetButtonClicked"
-          >重置</el-button
-        >
-        <el-button
-          v-if="onExportButtonClicked"
-          class="m-right10"
-          type="success"
-          @click="onExportButtonClicked"
+        <el-button v-if="onResetButtonClicked" class="m-right10" @click="onResetButtonClicked">重置</el-button>
+        <el-button v-if="onExportButtonClicked" class="m-right10" type="success" @click="onExportButtonClicked"
           >导出</el-button
         >
         <el-button :icon="collapseButtonIcon" class="m-right10" @click="toggle">
@@ -31,21 +21,20 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { computed, ref } from 'vue';
 
 defineProps({
   onSearchButtonClicked: Function,
   onResetButtonClicked: Function,
   onExportButtonClicked: Function
-})
-const collapsed = ref(false)
+});
+const collapsed = ref(false);
 function toggle() {
-  collapsed.value = !collapsed.value
+  collapsed.value = !collapsed.value;
 }
-const collapseButtonText = computed(() => (collapsed.value ? '展开' : '收起'))
-const collapseButtonIcon = computed(() =>
-  collapsed.value ? 'el-icon-arrow-down' : 'el-icon-arrow-up'
-)
+
+const collapseButtonText = computed(() => (collapsed.value ? '展开' : '收起'));
+const collapseButtonIcon = computed(() => (collapsed.value ? 'el-icon-arrow-down' : 'el-icon-arrow-up'));
 </script>
 <style scoped lang="less">
 .CommonSearchForm {
