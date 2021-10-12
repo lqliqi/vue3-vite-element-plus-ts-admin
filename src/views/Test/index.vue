@@ -32,7 +32,6 @@
         :list="tableData"
         :loading="tableLoading"
         @update="update"
-        @changeLoadingStatus="changeLoadingStatus"
       >
         <el-table-column prop="date" label="Date" width="200" />
         <el-table-column prop="name" label="Name" width="200" />
@@ -42,8 +41,8 @@
         <el-table-column prop="zip" label="Zip" width="200" />
         <el-table-column fixed="right" label="Operations" width="200">
           <template #default>
-            <el-button type="text" size="small" @click="handleClick('Detail')">Detail</el-button>
-            <el-button type="text" size="small" @click="handleClick('Edit')">Edit</el-button>
+            <el-button type="text" size="small" @click="DetailClicked()">Detail</el-button>
+            <el-button type="text" size="small" @click="EditClicked()">Edit</el-button>
           </template>
         </el-table-column>
       </CommonTable>
@@ -69,7 +68,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { reactive, watch, ref } from 'vue'
+import { reactive, watch, ref, provide } from 'vue'
 import CommonFileUploader from '@/components/CommonFileUploader.vue'
 import CommonSearchForm from '@/components/CommonSearchForm.vue'
 import CommonTable from '@/components/CommonTable.vue'
@@ -90,7 +89,6 @@ const getDefaultQueryObject = function () {
   } as Record<string, any>
 }
 const queryObject = reactive(getDefaultQueryObject())
-console.log('queryObject ', queryObject)
 // 子组件ref
 const table = ref('table')
 const totalItemCount = 6
@@ -186,13 +184,15 @@ const tableData = reactive([
     tag: 'Home'
   }
 ])
-function handleClick(control: string) {
-  console.log('click: ', control)
+// 详情
+function DetailClicked() {
+  console.log('DetailClicked: ')
 }
-// 修改loading 状态
-function changeLoadingStatus(value: boolean) {
-  tableLoading.value = value
+// 编辑
+function EditClicked() {
+  console.log('DetailClicked: ')
 }
+// 更新数据
 async function update() {
   console.log('update')
   tableData.length = 0 // 清空原数组
@@ -209,14 +209,10 @@ async function update() {
     })
   }
   tableData.push(...newArr) // 解构然后push进去
-  setTimeout(() => {
-    tableLoading.value = false
-  }, 3000)
-  console.log('tableLoading.value', tableLoading.value)
-  // eslint-disable-next-line no-return-await
 }
-console.log('update', update())
-
+// 使用provide和 inject 实现 update 方法的监听
+provide('update', update)
+// 监听表格数据变化
 watch(
   () => tableData,
   (count, prevCount) => {
@@ -224,9 +220,11 @@ watch(
     console.log('tableData prevCount ', prevCount)
   }
 )
+// 搜索
 function onSearchButtonClicked() {
   ;(table.value as any).searchForPageOne()
 }
+// 重置搜索项
 function onResetButtonClicked() {
   // 默认情况下修改对象, 界面不会自动更,如果想更新, 可以通过对象属性重新赋值的方式
   Object.keys(getDefaultQueryObject()).forEach((key) => {
@@ -234,6 +232,7 @@ function onResetButtonClicked() {
   })
   ;(table.value as any).searchForPageOne()
 }
+// 导出
 function onExportButtonClicked() {
   console.log('onExportButtonClicked')
 }

@@ -19,16 +19,13 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, defineEmits, watch, defineExpose } from 'vue'
+import { ref, defineEmits, watch, defineExpose, inject } from 'vue'
 
+const parentUpdate = inject('update')
 const props = defineProps({
   queryObject: Object,
   totalItemCount: Number,
-  list: Array,
-  loading: Boolean
-})
-watch((props as any).loading, (loading) => {
-  console.log('watch loading: ', loading)
+  list: Array
 })
 watch(
   (props as any).queryObject.pageSize,
@@ -39,17 +36,22 @@ watch(
 )
 
 const currentPage2 = ref(5)
-const emit = defineEmits(['update', 'changeLoadingStatus'])
-
+const loading = ref(true)
+const emit = defineEmits(['update'])
+// 搜索-调用父组件
 async function search() {
-  emit('changeLoadingStatus', true)
+  loading.value = true
   console.log('search...')
-  emit('update')
-  emit('changeLoadingStatus', false)
+  const returnedValue = (parentUpdate as any)()
+  returnedValue.then(() => {
+    console.log('数据加载完结束loading')
+    setTimeout(() => {
+      loading.value = false
+    }, 1000)
+  })
 }
 // eslint-disable-next-line no-unused-vars
 const searchForPageOne = () => {
-  console.log('searchForPageOne: ')
   ;(props as any).queryObject.pageNumber = 1
   search()
 }
@@ -60,19 +62,18 @@ defineExpose({
 // eslint-disable-next-line no-unused-vars
 
 const handleSizeChange = (val: any) => {
-  console.log(`每页数据${val}条`)
   ;(props as any).queryObject.pageSize = val
   search()
   emit('update')
 }
 const handleCurrentChange = (val: any) => {
-  console.log(`当前页码${val}`)
   ;(props as any).queryObject.pageNumber = val
   search()
   emit('update')
 }
 search()
 </script>
+
 <style lang="less" scoped>
 .CommonTable {
   display: block;
