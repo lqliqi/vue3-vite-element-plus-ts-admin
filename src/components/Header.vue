@@ -1,9 +1,9 @@
 <script setup lang="ts"></script>
 
 <template>
-  <el-header style="font-size: 12px; text-align: right">
+  <el-header>
     <el-dropdown>
-      <i class="el-icon-setting" style="margin-right: 15px"></i>
+      <i class="el-icon-setting"></i>
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item>View</el-dropdown-item>
@@ -16,10 +16,15 @@
   </el-header>
 </template>
 
-<style scoped>
+<style scoped lang="less">
 .el-header {
   color: var(--el-text-color-primary);
+  font-size: 12px;
   line-height: 60px;
+  text-align: right;
   background-color: #b3c0d1;
+  .el-icon-setting {
+    margin-right: 15px;
+  }
 }
 </style>

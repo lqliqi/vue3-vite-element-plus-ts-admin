@@ -1,15 +1,11 @@
 <template>
   <el-col class="CommonGridOption" :md="md" :lg="lg">
-    <div style="display: flex">
-      <div
-        class="CommonGridOptionLabel"
-        :class="{ CommonGridOptionModified: valueModified }"
-        style="width: 120px; padding-right: 10px; font-weight: bold; text-align: right"
-      >
+    <div class="CommonGridOptionLabelWrapper">
+      <div class="CommonGridOptionLabel" :class="{ CommonGridOptionModified: valueModified }">
         {{ label }}
       </div>
-      <div class="CommonGridOptionContent" style="flex: 1">
-        <div style="word-break: break-all"><slot /></div>
+      <div class="CommonGridOptionContent">
+        <div class="CommonGridOptionInerContent"><slot /></div>
       </div>
     </div>
   </el-col>
@@ -32,7 +28,20 @@ if (props.expand) {
 <style lang="less" scoped>
 .CommonGridOption {
   margin-bottom: 22px;
+  .CommonGridOptionLabelWrapper {
+    display: flex;
+    .CommonGridOptionContent {
+      flex: 1;
+      .CommonGridOptionInerContent {
+        word-break: break-all;
+      }
+    }
+  }
   .CommonGridOptionLabel {
+    width: 120px;
+    padding-right: 10px;
+    font-weight: bold;
+    text-align: right;
     &.CommonGridOptionModified {
       color: red;
     }

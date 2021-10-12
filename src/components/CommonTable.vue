@@ -1,6 +1,6 @@
 <template>
   <div class="CommonTable">
-    <el-table :data="list" v-loading="loading" style="width: 100%">
+    <el-table :data="list" v-loading="loading">
       <slot></slot>
     </el-table>
     <div class="demo-pagination-block">
