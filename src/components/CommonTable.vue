@@ -19,7 +19,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, defineEmits, watch, defineExpose, inject } from 'vue';
+import { ref, watch, defineExpose, inject } from 'vue';
 
 const parentUpdate = inject('update');
 const props = defineProps({
