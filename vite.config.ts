@@ -3,6 +3,11 @@ import vue from '@vitejs/plugin-vue';
 // 如果编辑器提示 path 模块找不到，则可以安装一下 @types/node -> npm i @types/node -D
 import { resolve } from 'path';
 
+// eslint-disable-next-line import/no-unresolved
+import Components from 'unplugin-vue-components/vite';
+// eslint-disable-next-line import/no-unresolved
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
+
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
@@ -10,7 +15,6 @@ export default defineConfig({
       '@': resolve(__dirname, 'src') // 设置 `@` 指向 `src` 目录
     }
   },
-  plugins: [vue()],
   base: './', // 设置打包路径
   server: {
     // port: 4000, // 设置服务启动端口号
@@ -26,5 +30,15 @@ export default defineConfig({
     //     rewrite: (path) => path.replace('/api/', '/')
     //   }
     // }
-  }
+  },
+  plugins: [
+    vue(),
+    Components({
+      resolvers: [
+        ElementPlusResolver({
+          importStyle: 'css'
+        })
+      ]
+    })
+  ]
 });
