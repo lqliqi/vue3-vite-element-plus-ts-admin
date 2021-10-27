@@ -33,6 +33,7 @@ export default defineConfig({
   },
   plugins: [
     vue(),
+    // 按需加载 elment-plus 组件
     Components({
       resolvers: [
         ElementPlusResolver({
