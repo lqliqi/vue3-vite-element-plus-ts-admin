@@ -4,9 +4,9 @@
   <router-view></router-view>
 </template>
 
-<style>
-body,
+<style lang="less">
 html,
+body,
 #app {
   box-sizing: border-box;
   height: 100%;
