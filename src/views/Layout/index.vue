@@ -5,10 +5,10 @@
         <div class="logo"></div>
         <el-menu :default-openeds="['1', '3']">
           <el-sub-menu index="1">
-            <template #title><i class="el-icon-message"></i>Navigator One</template>
+            <template #title><i class="el-icon-message"></i>组件示例</template>
             <el-menu-item-group>
-              <el-menu-item index="1-1">Option 1</el-menu-item>
-              <el-menu-item index="1-2">Option 2</el-menu-item>
+              <el-menu-item index="1-1" @click="goToPage('Test')">Test页面</el-menu-item>
+              <el-menu-item index="1-2" @click="goToPage('Test')">Info</el-menu-item>
             </el-menu-item-group>
             <el-sub-menu index="1-4">
               <template #title>Option4</template>
@@ -36,8 +36,18 @@
 </template>
 
 <script setup lang="ts">
+import { useRoute, useRouter } from 'vue-router';
 import Header from '@/components/Header.vue';
 import Footer from '@/components/Footer.vue';
+
+const route = useRoute();
+const router = useRouter();
+// 跳转路由
+function goToPage(name: string) {
+  console.log(route.query);
+  console.log(route.params);
+  router.push({ name });
+}
 </script>
 
 <style lang="less" scoped>
