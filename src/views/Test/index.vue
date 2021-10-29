@@ -1,6 +1,7 @@
 <template>
   <div class="Test">
     <h1>组件使用</h1>
+    <p>鼠标当前位置：X: {{ x }}, Y: {{ y }}</p>
     <el-tabs v-model="activeTab">
       <el-tab-pane v-for="(item, index) in tabList" :label="item" :key="index" :name="item"></el-tab-pane>
     </el-tabs>
@@ -69,7 +70,9 @@ import CommonGrid from '@/components/CommonGrid.vue';
 import CommonTitle from '@/components/CommonTitle.vue';
 import CommonCard from '@/components/CommonCard.vue';
 import CommonGridOption from '@/components/CommonGridOption.vue';
+import useMouse from '@/utils/mouse.ts';
 
+const { x, y } = useMouse();
 const activeTab = ref('列表');
 const tabList = ['列表', '信息', '创建'];
 const tableLoading = ref(true);
