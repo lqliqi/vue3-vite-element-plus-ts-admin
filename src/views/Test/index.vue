@@ -60,6 +60,7 @@
       </Rate>
     </div>
     <div v-show="activeTab === '创建'">
+      <TransitionEffect></TransitionEffect>
       <CommonFileUploader></CommonFileUploader>
     </div>
   </div>
@@ -75,6 +76,7 @@ import CommonCard from '@/components/CommonCard.vue';
 import CommonGridOption from '@/components/CommonGridOption.vue';
 import useMouse from '@/utils/mouse.ts';
 import Rate from '@/components/Rate.vue';
+import TransitionEffect from '@/components/Transition.vue';
 
 const score = ref(3.5);
 // function updateRate(num: number) {
