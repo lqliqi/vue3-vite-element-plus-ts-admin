@@ -23,6 +23,6 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue"
-  ],
+, "src/store/gvuex.js"  ],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }

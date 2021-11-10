@@ -58,6 +58,7 @@
       <Rate v-model="score" :theme="'yellow'">
         <h2>你的评分是：</h2>
       </Rate>
+      <Count></Count>
     </div>
     <div v-show="activeTab === '创建'">
       <TransitionEffect></TransitionEffect>
@@ -77,6 +78,7 @@ import CommonGridOption from '@/components/CommonGridOption.vue';
 import useMouse from '@/utils/mouse.ts';
 import Rate from '@/components/Rate.vue';
 import TransitionEffect from '@/components/Transition.vue';
+import Count from '@/components/Count.vue';
 
 const score = ref(3.5);
 // function updateRate(num: number) {

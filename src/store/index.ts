@@ -1,27 +1,34 @@
 import { createStore } from 'vuex';
 
-const defaultState = {
-  count: 0
-};
-
+interface StoreState {
+  count: number;
+}
 // Create a new store instance.
-export default createStore({
+const store = createStore({
   state() {
-    return defaultState;
+    return {
+      count: 0
+    };
   },
+  // mutations: 直接用来修改数据
   mutations: {
-    increment(state: typeof defaultState) {
+    add(state: StoreState) {
       state.count += 1;
     }
   },
+  // actions:不直接修改数据，用来做异步数据的修改，通过 mutations 去修改
   actions: {
-    increment(context) {
-      context.commit('increment');
+    asyncAdd({ commit }) {
+      setTimeout(() => {
+        commit('add');
+      }, 1000);
     }
   },
   getters: {
-    double(state: typeof defaultState) {
+    double(state: StoreState) {
       return 2 * state.count;
     }
   }
 });
+
+export default store;
