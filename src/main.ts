@@ -12,4 +12,7 @@ app.use(router);
 app.use(store);
 // app.use(ElementPlus, { locale });
 
+window.onerror = function (e) {
+  console.log([`https://stackoverflow.com/search?q=[js]+${e}`]);
+};
 app.mount('#app');
