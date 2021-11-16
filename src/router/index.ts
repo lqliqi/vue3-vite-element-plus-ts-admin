@@ -11,6 +11,16 @@ const routes: Array<RouteRecordRaw> = [
         path: '/Home',
         name: 'Home',
         component: () => import('@/views/Home/index.vue')
+      },
+      {
+        path: '/Info',
+        name: 'Info',
+        component: () => import('@/views/Info/index.vue')
+      },
+      {
+        path: '/About',
+        name: 'About',
+        component: () => import('@/views/About/index.vue')
       }
     ]
   },
@@ -18,11 +28,6 @@ const routes: Array<RouteRecordRaw> = [
     path: '/Test',
     name: 'Test',
     component: () => import('@/views/Test/index.vue')
-  },
-  {
-    path: '/Info',
-    name: 'Info',
-    component: () => import('@/views/Info/index.vue')
   }
 ];
 
