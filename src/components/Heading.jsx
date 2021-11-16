@@ -1,4 +1,4 @@
-import { defineComponent, h } from 'vue';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
   props: {
@@ -7,12 +7,17 @@ export default defineComponent({
       required: true
     }
   },
+  // setup(props, { slots }) {
+  //   return () =>
+  //     h(
+  //       `h${props.level}`, // 标签名
+  //       {}, // prop 或 attribute
+  //       slots.default() // 子节点
+  //     );
+  // }
+
   setup(props, { slots }) {
-    return () =>
-      h(
-        `h${props.level}`, // 标签名
-        {}, // prop 或 attribute
-        slots.default() // 子节点
-      );
+    const tag = `h${props.level}`;
+    return () => <tag>{slots.default()}</tag>;
   }
 });
