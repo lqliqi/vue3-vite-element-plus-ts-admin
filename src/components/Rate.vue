@@ -18,7 +18,7 @@ const props: any = defineProps({
   modelValue: Number,
   theme: { type: String, default: 'orange' }
 });
-const width = ref(props.value);
+const width = ref(props.score);
 const themeObj = {
   black: '#00',
   white: '#fff',
@@ -33,7 +33,7 @@ function mouseOver(i: number) {
   width.value = i;
 }
 function mouseOut() {
-  width.value = props.value;
+  width.value = props.modelValue;
 }
 const emits = defineEmits(['update:modelValue']); // 定义emits
 function onRate(num: number) {

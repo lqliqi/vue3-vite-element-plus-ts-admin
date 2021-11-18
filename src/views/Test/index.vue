@@ -55,7 +55,7 @@
           <CommonGridOption label="性别" :expand="false"> 男</CommonGridOption>
         </CommonGrid>
       </CommonCard>
-      <Rate v-model="score" :theme="'yellow'">
+      <Rate v-model="score" :theme="'green'">
         <h2>你的评分是：</h2>
       </Rate>
       <Count></Count>
@@ -80,10 +80,7 @@ import Rate from '@/components/Rate.vue';
 import TransitionEffect from '@/components/Transition.vue';
 import Count from '@/components/Count.vue';
 
-const score = ref(3.5);
-// function updateRate(num: number) {
-//   score.value = num;
-// }
+const score = ref<number>(3.5);
 const { x, y } = useMouse();
 const activeTab = ref('列表');
 const tabList = ['列表', '信息', '创建'];
