@@ -7,6 +7,7 @@ import router from './router/index.ts';
 import store from './store/index.ts';
 // import 'element-plus/dist/index.css';
 
+console.log(process.env.NODE_ENV);
 const app = createApp(App);
 app.use(router);
 app.use(store);

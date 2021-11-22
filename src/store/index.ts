@@ -27,6 +27,10 @@ const store = createStore({
   getters: {
     double(state: StoreState) {
       return 2 * state.count;
+    },
+    token(state: StoreState) {
+      // 获取token 逻辑
+      console.log('state token: ', state);
     }
   }
 });

@@ -1,23 +1,23 @@
 import Axios from 'axios';
 import { ElMessage } from 'element-plus';
-
-const baseURL = 'https://api.github.com';
+import store from '@/store/index.ts';
 
 const axios = Axios.create({
-  baseURL,
+  baseURL: process.env.VUE_APP_BASE_API,
   timeout: 20000 // 请求超时 20s
 });
 
 // 前置拦截器（发起请求之前的拦截）
 axios.interceptors.request.use(
-  (response) => {
-    /**
-     * 根据你的项目实际情况来对 config 做处理
-     * 这里对 config 不做任何处理，直接返回
-     */
-    return response;
+  (config: any) => {
+    if (store.getters.token) {
+      // eslint-disable-next-line no-param-reassign
+      config.headers['X-Token'] = store.getters.token;
+    }
+    return config;
   },
   (error) => {
+    console.log(error); // for debug
     return Promise.reject(error);
   }
 );
@@ -25,21 +25,15 @@ axios.interceptors.request.use(
 // 后置拦截器（获取到响应时的拦截）
 axios.interceptors.response.use(
   (response) => {
-    /**
-     * 根据你的项目实际情况来对 response 和 error 做处理
-     * 这里对 response 和 error 不做任何处理，直接返回
-     */
-    return response;
+    const res = response.data;
+    if (res.code !== 20000) {
+      console.log('接口信息报错', res.message);
+      return Promise.reject(new Error(res.message || 'Error'));
+    }
+    return res;
   },
   (error) => {
-    if (error.response && error.response.data) {
-      const code = error.response.status;
-      const msg = error.response.data.message;
-      ElMessage(`Code: ${code}, Message: ${msg}`);
-      console.error(`[Axios Error]`, error.response);
-    } else {
-      ElMessage(`${error}`);
-    }
+    ElMessage(`接口信息报错${error}`);
     return Promise.reject(error);
   }
 );
