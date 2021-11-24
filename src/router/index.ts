@@ -1,4 +1,6 @@
 import { createRouter, createWebHashHistory, Router, RouteRecordRaw } from 'vue-router';
+// progress bar
+import NProgress from 'nprogress';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -34,6 +36,16 @@ const routes: Array<RouteRecordRaw> = [
 const router: Router = createRouter({
   history: createWebHashHistory(),
   routes
+});
+
+router.beforeEach(async (to, from, next) => {
+  // start progress bar
+  NProgress.start();
+  next();
+});
+router.afterEach(() => {
+  // finish progress bar
+  NProgress.start();
 });
 
 export default router;
